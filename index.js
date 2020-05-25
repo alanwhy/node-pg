@@ -21,18 +21,7 @@ app.all("*", (req, res, next) => {
   next();
 });
 
-// app.get("/", (req, res) => {
-//   res.json("helloworld");
-// });
-
-// app.post("/test/:data", (req, res) => {
-//   return res.json({
-//     query: req.query,
-//     data: req.params,
-//     json: req.body,
-//   });
-// });
-
+// 查询
 app.get("/api/query", async (req, res) => {
   var { limit, offset } = url.parse(req.url, true).query;
   let pg_util = new pgUtil();
@@ -51,6 +40,7 @@ app.get("/api/query", async (req, res) => {
   res.json(result);
 });
 
+// 查询
 app.get("/api/queryBySql", async (req, res) => {
   let { sql, limit, offset } = url.parse(req.url, true).query;
   let pg_util = new pgUtil();
@@ -69,6 +59,8 @@ app.get("/api/queryBySql", async (req, res) => {
   res.json(result);
 });
 
+
+// 插入记录
 app.post("/api/insert", async (req, res) => {
   let params = req.body;
   let pg_util = new pgUtil();
@@ -78,6 +70,8 @@ app.post("/api/insert", async (req, res) => {
   }
 });
 
+
+// 更新记录
 app.post("/api/update", async (req, res) => {
   let params = req.body;
   let pg_util = new pgUtil();
@@ -87,6 +81,7 @@ app.post("/api/update", async (req, res) => {
   }
 });
 
+// 删除记录
 app.get("/api/delete/:uuid", async (req, res) => {
   let { uuid } = req.params;
   let pg_util = new pgUtil();
@@ -96,6 +91,7 @@ app.get("/api/delete/:uuid", async (req, res) => {
   }
 });
 
+// 业务需求 也是更新
 app.post("/api/examine", async (req, res) => {
   let { uuid, state } = req.body;
   let pg_util = new pgUtil();
