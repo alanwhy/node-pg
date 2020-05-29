@@ -68,11 +68,12 @@ class pgUtil {
       date,
       url,
       user_key,
+      self
     } = data;
     let uid = uuid.v4();
     let msg = await pool.query(
-      `INSERT INTO ${tableName} (uuid, name, icon, type, img, help_info, tags, state, date, url, user_key) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
-      [uid, name, icon, type, img, help_info, tags, state, date, url, user_key]
+      `INSERT INTO ${tableName} (uuid, name, icon, type, img, help_info, tags, state, date, url, user_key, self) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
+      [uid, name, icon, type, img, help_info, tags, state, date, url, user_key, self]
     );
     return msg;
   }
@@ -94,10 +95,11 @@ class pgUtil {
       date,
       url,
       user_key,
+      self
     } = data;
     let msg = await pool.query(
-      `UPDATE ${tableName} SET name = $2 ,icon = $3 ,type = $4 ,img = $5 ,help_info = $6 ,tags = $7 ,state = $8 ,date = $9 ,url = $10, user_key = $11 WHERE uuid = $1`,
-      [uuid, name, icon, type, img, help_info, tags, state, date, url, user_key]
+      `UPDATE ${tableName} SET name = $2 ,icon = $3 ,type = $4 ,img = $5 ,help_info = $6 ,tags = $7 ,state = $8 ,date = $9 ,url = $10, user_key = $11, self = $12 WHERE uuid = $1`,
+      [uuid, name, icon, type, img, help_info, tags, state, date, url, user_key, self]
     );
     return msg;
   }
